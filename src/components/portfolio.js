@@ -124,7 +124,7 @@ function Portfolio() {
                 classNames="fade"
               >
                 <ImageWrapper className="w-full lg:w-1/3 lg:p-3" onClick={() => handleCardClick(image.link)}>
-                  <LazyImage src={image.src} alt="" style={lazyload} />
+                  <LazyImage src={image.src} alt="" />
                 </ImageWrapper>
               </CSSTransition>
             ))}
