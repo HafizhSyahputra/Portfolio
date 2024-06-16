@@ -55,6 +55,12 @@ const Name = styled.h1`
   margin-bottom: 1rem;
   font-family: "Poppins", sans-serif;
   position: relative;
+  span {
+    color: white;
+  }
+  .highlight {
+    color: #FFC700;
+  }
 
   &::after {
     content: "";
@@ -248,8 +254,9 @@ const App = () => {
       <Container>
         <LeftSection isVisible={isVisible}>
           <Name>
-            Hafizh <br />
-            Syahputra.
+            <span>Hafizh <br />
+            Syahputra</span>
+            <span className="highlight">.</span>
           </Name>
           <SocialLinks>
             <SocialLink href="https://www.instagram.com/hafiz.sn/">

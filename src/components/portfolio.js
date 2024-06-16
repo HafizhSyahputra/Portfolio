@@ -8,6 +8,7 @@ import realestate from "../assets/img/portfolio/realestate.webp";
 import makan from "../assets/img/portfolio/makan.webp";
 import hospital from "../assets/img/portfolio/hospital.webp";
 import inventory from "../assets/img/portfolio/inventory.webp";
+import { lazyload } from "react-lazyload";
 
 const images = [
   {
@@ -53,6 +54,7 @@ const fadeIn = keyframes`
   }
 `;
 
+
 function Portfolio() {
   const [filter, setFilter] = useState("all");
   const [navigationUrl, setNavigationUrl] = useState(null);
@@ -62,25 +64,32 @@ function Portfolio() {
 
   useEffect(() => {
     setIsLoaded(true);
-
+  
     const handleScroll = () => {
       const portfolioElement = document.getElementById("portfolio");
       if (portfolioElement) {
         const scrollPosition = window.scrollY + window.innerHeight;
         const portfolioOffset = portfolioElement.offsetTop;
-
+  
         if (scrollPosition > portfolioOffset && !isAnimated) {
           setIsAnimated(true);
         }
       }
     };
-
+  
+    const handleModalClose = () => {
+      setShowModal(false);
+    };
+  
     window.addEventListener("scroll", handleScroll);
-
+    window.addEventListener("focus", handleModalClose); 
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("focus", handleModalClose);
     };
   }, [isAnimated]);
+  
 
   const filteredImages = filter === "all" ? images : images.filter(image => image.category === filter);
 
@@ -88,8 +97,13 @@ function Portfolio() {
     setShowModal(true);
     setTimeout(() => {
       window.location.href = url;
-    }, 1500); // Adjust the delay as needed
+    }, 1500);
+  
+    setTimeout(() => {
+      setShowModal(false);
+    }, 2000);
   };
+  
 
   return (
     <Section id="portfolio" className={`py-10 lg:py-20 ${isAnimated ? 'animated' : ''}`}>
@@ -110,7 +124,7 @@ function Portfolio() {
                 classNames="fade"
               >
                 <ImageWrapper className="w-full lg:w-1/3 lg:p-3" onClick={() => handleCardClick(image.link)}>
-                  <LazyImage src={image.src} alt="" />
+                  <LazyImage src={image.src} alt="" style={lazyload} />
                 </ImageWrapper>
               </CSSTransition>
             ))}
@@ -255,6 +269,7 @@ const LazyImage = ({ src, alt }) => {
     </ImageContainer>
   );
 };
+
 
 const ImageContainer = styled.div`
   position: relative;

@@ -10,11 +10,17 @@ function Header() {
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
+    console.log("Scrolling to:", id); // Debugging log
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 100); // Tambahkan delay sebelum scroll
+    } else {
+      console.warn(`Element with id "${id}" not found.`);
     }
-    setIsOpen(false); // Close the menu on mobile after click
   };
+  
+  
 
   return (
     <nav className="bg-custom p-10 pl-32 pr-32">
