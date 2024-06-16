@@ -207,7 +207,7 @@ const Contact = () => {
             />
             <InfoWrapper>
               <InfoLabel>Address</InfoLabel>
-              <InfoText>Jl. Mwaywarah</InfoText>
+              <InfoText>Jl. Musyawarah</InfoText>
             </InfoWrapper>
           </Info>
           <Info>
