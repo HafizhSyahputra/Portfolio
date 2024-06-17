@@ -1,0 +1,16 @@
+.dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: max-height 0.4s ease-out;
+  }
+  
+  .dropdown-menu.open {
+    max-height: 105px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

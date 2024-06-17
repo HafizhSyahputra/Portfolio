@@ -23,12 +23,16 @@ const slideInFromLeft = keyframes`
 
 // Styled Components
 const Container = styled.div`
-  margin-top: 0px;
+  margin-top: -20px;
   display: flex;
   flex-wrap: wrap;
   background-color: #2e2f34;
   color: #fff;
   font-family: "Arial, sans-serif";
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const LeftSection = styled.div`
@@ -44,7 +48,7 @@ const LeftSection = styled.div`
 
   @media (max-width: 1024px) {
     margin-left: 10px;
-    margin-top:50px;
+    margin-top: 20px;
     padding: 20px;
   }
 `;
@@ -59,7 +63,7 @@ const Name = styled.h1`
     color: white;
   }
   .highlight {
-    color: #FFC700;
+    color: #ffc700;
   }
 
   &::after {
@@ -129,7 +133,7 @@ const ProfileImageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
-  margin-left: 65px;
+  margin-left: 105px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition: opacity 2s ease-in;
 
@@ -139,13 +143,19 @@ const ProfileImageWrapper = styled.div`
     width: 100%;
     order: 2;
   }
-  
+
+  @media (max-width: 768px) {
+    order: 3; /* Move to bottom */
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
   @media (max-width: 500px) {
     margin-top: 20px;
     margin-left: 10px;
     width: 100%;
-    flex-direction: column; 
-    flex: 1; 
+    flex-direction: column;
+    flex: 1;
   }
 `;
 
@@ -155,7 +165,7 @@ const ProfileImage = styled.img`
   border-radius: 10px;
 
   @media (min-width: 768px) {
-    object-fit: cover; 
+    object-fit: cover;
   }
 `;
 
@@ -173,7 +183,7 @@ const RightSection = styled.div`
   @media (max-width: 768px) {
     padding: 20px;
     margin-left: 10px;
-    margin-top:0px;
+    margin-top: 50px;
   }
 `;
 
@@ -269,8 +279,10 @@ const App = () => {
       <Container>
         <LeftSection isVisible={isVisible}>
           <Name>
-            <span>Hafizh <br />
-            Syahputra</span>
+            <span>
+              Hafizh <br />
+              Syahputra
+            </span>
             <span className="highlight">.</span>
           </Name>
           <SocialLinks>

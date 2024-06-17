@@ -165,11 +165,11 @@ const Name = styled.h1`
 
 const Section = styled.section`
   padding: 10px; 
-  margin-top: 110px;
+  margin-top: 45px;
   margin-left: 80px; 
   margin-right: 80px;
   @media (min-width: 1024px) {
-    padding: 60px; 
+    padding:40px; 
   }
 
   &.animated {
@@ -214,15 +214,20 @@ const ImageWrapper = styled.div`
   width: 100%;
   padding: 4px;
   cursor: pointer;
-  animation: ${fadeIn} 1s ease-in;  
-  
+  animation: ${fadeIn} 1s ease-in;
+
   @media (min-width: 1024px) {
     width: 33.3333%;
     padding: 16px;
   }
 
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 6px;
+  }
+
   &:hover {
-    transform: scale(1.05);  
+    transform: scale(1.05);
     transition: transform 0.3s ease;
   }
 
@@ -230,17 +235,17 @@ const ImageWrapper = styled.div`
     opacity: 0;
     transform: scale(0.95);
   }
-  
+
   .fade-enter-active {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.8s, transform 0.8s ease;  
+    transition: opacity 0.8s, transform 0.8s ease;
   }
-  
+
   .fade-exit {
     opacity: 1;
   }
-  
+
   .fade-exit-active {
     opacity: 0;
     transition: opacity 0.5s;

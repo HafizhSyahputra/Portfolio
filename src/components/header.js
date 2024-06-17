@@ -1,26 +1,23 @@
-import React, { useState } from "react";
-import logo from "../assets/img/HP.png"; // Import the image
+import React, { useState, useCallback } from "react";
+import logo from "../assets/img/HP.png"; 
+import "./header.css"; 
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleToggle = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
 
-  const scrollToSection = (id) => {
+  const scrollToSection = useCallback((id) => {
     const element = document.getElementById(id);
-    console.log("Scrolling to:", id); // Debugging log
+    console.log("Scrolling to:", id); 
     if (element) {
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: "smooth" });
-      }, 100); // Tambahkan delay sebelum scroll
+      element.scrollIntoView({ behavior: "smooth" });
     } else {
-      console.warn(`Element with id "${id}" not found.`);
+      console.warn(`Element dengan id "${id}" tidak ditemukan.`);
     }
-  };
-  
-  
+  }, []);
 
   return (
     <nav className="bg-custom p-10 pl-32 pr-32">
@@ -30,19 +27,20 @@ function Header() {
         </div>
         <div className="hidden md:flex space-x-20">
           <button
-            className="text-gray-300 hover:text-white cursor-pointer"
+            className="text-gray-300 hover:text-yellow-400 cursor-pointer"
+            onClick={() => scrollToSection("aboutme")}
           >
             About Me
           </button>
           <button
             onClick={() => scrollToSection("portfolio")}
-            className="text-gray-300 hover:text-white cursor-pointer"
+            className="text-gray-300 hover:text-yellow-400 cursor-pointer"
           >
             Portfolio
           </button>
           <button
             onClick={() => scrollToSection("contact")}
-            className="text-gray-300 hover:text-white cursor-pointer"
+            className="text-gray-300 hover:text-yellow-400 cursor-pointer"
           >
             Contact
           </button>
@@ -79,24 +77,22 @@ function Header() {
           </button>
         </div>
       </div>
-      {isOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <button
-              onClick={() => scrollToSection("portfolio")}
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={() => scrollToSection("contact")}
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Contact
-            </button>
-          </div>
+      <div className={`md:hidden dropdown-menu ${isOpen ? 'open' : ''}`}>
+        <div className="px-2 pt-5 space-y-1">
+          <button
+            onClick={() => scrollToSection("portfolio")}
+            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Portfolio
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Contact
+          </button>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
