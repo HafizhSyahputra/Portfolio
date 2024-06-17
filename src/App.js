@@ -182,7 +182,6 @@ const RightSection = styled.div`
 
   @media (max-width: 768px) {
     padding: 20px;
-    margin-left: 10px;
     margin-top: 50px;
   }
 `;
