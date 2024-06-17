@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import profileImage from "./assets/img/Putra-Image.png";
 import pdfFile from "./assets/file/CV Hafizh Syahputra.pdf";
-import Header from "./components/header";
 import Portfolio from "./components/portfolio";
 import Contact from "./components/contact";
 
@@ -43,8 +42,9 @@ const LeftSection = styled.div`
   transform: translateX(${(props) => (props.isVisible ? "0" : "-100%")});
   transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 
-  @media (max-width: 768px) {
-    margin-left: 0;
+  @media (max-width: 1024px) {
+    margin-left: 10px;
+    margin-top:50px;
     padding: 20px;
   }
 `;
@@ -129,14 +129,23 @@ const ProfileImageWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 50px;
-  margin-left: 90px;
+  margin-left: 65px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transition: opacity 2s ease-in;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     margin-top: 20px;
-    margin-left: 0;
+    margin-left: 10px;
     width: 100%;
+    order: 2;
+  }
+  
+  @media (max-width: 500px) {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 100%;
+    flex-direction: column; 
+    flex: 1; 
   }
 `;
 
@@ -144,6 +153,10 @@ const ProfileImage = styled.img`
   max-width: 100%;
   height: auto;
   border-radius: 10px;
+
+  @media (min-width: 768px) {
+    object-fit: cover; 
+  }
 `;
 
 const RightSection = styled.div`
@@ -159,6 +172,8 @@ const RightSection = styled.div`
 
   @media (max-width: 768px) {
     padding: 20px;
+    margin-left: 10px;
+    margin-top:0px;
   }
 `;
 

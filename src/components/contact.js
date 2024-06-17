@@ -44,11 +44,26 @@ const FormWrapper = styled.div`
     align-items: center;
     padding: 5rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 1.8rem; 
+    margin-bottom:20px;
+    max-width: 90%;  
+  }
+
+   @media (max-width: 400px) {
+    max-width: 90%;  
+  }
 `;
 
 const ContactDetails = styled.div`
   color: #fff;
   flex: 1;
+  padding-right: 2rem;  
+
+  @media (max-width: 768px) {
+    margin-bottom:-20px ; 
+  }
 `;
 
 const First = styled.p`
@@ -61,6 +76,10 @@ const First = styled.p`
   width: 165px;
   border-bottom: 1px solid #ffb400;
   padding-bottom: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;  
+  }
 `;
 
 const Title = styled.h2`
@@ -68,6 +87,10 @@ const Title = styled.h2`
   font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem; 
+  }
 `;
 
 const Description = styled.p`
@@ -77,6 +100,10 @@ const Description = styled.p`
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   color: #b0b0b0;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;  
+  }
 `;
 
 const Info = styled.div`
@@ -87,6 +114,11 @@ const Info = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-left: 20px; 
+    font-size: 0.8rem; 
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -98,16 +130,24 @@ const InfoWrapper = styled.div`
 const InfoLabel = styled.span`
   color: #ffffff;
   font-size: 0.9rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;  
+  }
 `;
 
 const InfoText = styled.span`
   color: #ffc700;
   font-family: "Poppins", sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;  
+  }
 `;
 
 const Form = styled.form`
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 0px;
+  margin-right: 0px;
   margin-top: 70px;
   display: grid;
   grid-template-columns: 1fr;
@@ -116,7 +156,11 @@ const Form = styled.form`
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
     margin-left: auto;
-    margin-right: 60px;
+    margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;  
   }
 `;
 
@@ -129,6 +173,10 @@ const Input = styled.input`
   font-size: 13px;
   background-color: #34353a;
   color: #fff;
+
+  @media (max-width: 768px) {
+    font-size: 12px;  
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -143,6 +191,9 @@ const TextArea = styled.textarea`
 
   @media (max-width: 768px) {
     grid-column: span 1;
+    height: 150px;  
+    padding:22px;
+    font-size: 12px;  
   }
 `;
 
@@ -207,7 +258,7 @@ const Contact = () => {
             />
             <InfoWrapper>
               <InfoLabel>Address</InfoLabel>
-              <InfoText>Jl. Musyawarah</InfoText>
+              <InfoText>Jl. Mwaywarah</InfoText>
             </InfoWrapper>
           </Info>
           <Info>

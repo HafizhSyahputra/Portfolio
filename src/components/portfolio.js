@@ -106,9 +106,9 @@ function Portfolio() {
   
 
   return (
-    <Section id="portfolio" className={`py-10 lg:py-20 ${isAnimated ? 'animated' : ''}`}>
-      <Container className="container mx-auto px-4">
-        <Name><span>MY</span><span className="highlight"> PORTFOLIO</span></Name>
+    <Section className={`py-10 lg:py-20 ${isAnimated ? 'animated' : ''}`}>
+      <Container id="portfolio"  className="container mx-auto px-4">
+        <Name><pre>MY</pre><pre className="highlight"> PORTFOLIO</pre></Name>
         <FilterWrapper className="pl-20 pr-20">
           <FilterButton onClick={() => setFilter("all")}>All</FilterButton>
           <FilterButton onClick={() => setFilter("app")}>App</FilterButton>
@@ -124,7 +124,7 @@ function Portfolio() {
                 classNames="fade"
               >
                 <ImageWrapper className="w-full lg:w-1/3 lg:p-3" onClick={() => handleCardClick(image.link)}>
-                  <LazyImage src={image.src} alt="" />
+                  <LazyImage src={image.src} alt="" style={lazyload} />
                 </ImageWrapper>
               </CSSTransition>
             ))}
@@ -153,8 +153,9 @@ const Name = styled.h1`
   font-size: 32px;
   margin-top: 20px;
   
-  span {
+  pre {
     color: white;
+    font-family:poppins, sans-serif;
   }
   
   .highlight {
@@ -168,11 +169,11 @@ const Section = styled.section`
   margin-left: 80px; 
   margin-right: 80px;
   @media (min-width: 1024px) {
-    padding: 20px; 
+    padding: 60px; 
   }
 
   &.animated {
-    animation: ${fadeIn} 1s ease-in;
+    animation: ${fadeIn} 1.3s ease-in;
   }
 `;
 
