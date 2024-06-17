@@ -18,6 +18,8 @@ const fadeIn = keyframes`
 
 const ContactContainer = styled.div`
   margin-top: 50px;
+  width:100%;
+  padding-left:9px;
   display: flex;
   justify-content: center;
   align-items: center;
