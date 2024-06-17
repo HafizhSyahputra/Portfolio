@@ -47,8 +47,8 @@ const LeftSection = styled.div`
   transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 
   @media (max-width: 1024px) {
-    margin-left: 10px;
-    margin-top: 20px;
+    margin-left: 0px;
+    margin-top: 40px;
     padding: 20px;
   }
 `;
@@ -76,6 +76,20 @@ const Name = styled.h1`
     bottom: -20px;
     left: 23%;
     transform: translateX(-50%);
+  }
+
+  @media (max-width: 1024px) {
+    &::after {
+    content: "";
+    display: block;
+    width: 230px;
+    height: 1px;
+    background-color: #ffa500;
+    position: absolute;
+    bottom: -20px;
+    left: 23%;
+    transform: translateX(-22%);
+  }
   }
 `;
 

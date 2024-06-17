@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 `;
 
 const ContactContainer = styled.div`
-  margin-top: 50px;
+  margin-top: 20px;
   width:100%;
   padding-left:10px;
   display: flex;
@@ -25,6 +25,12 @@ const ContactContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   background-color: #2e2f34;
+  @media (max-width: 768px) {
+      margin-top: 30px;
+      display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -48,7 +54,7 @@ const FormWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 1.8rem; 
+    padding: 2rem; 
     margin-bottom:20px;
     max-width: 90%;  
   }
@@ -61,7 +67,6 @@ const FormWrapper = styled.div`
 const ContactDetails = styled.div`
   color: #fff;
   flex: 1;
-  padding-right: 2rem;  
 
   @media (max-width: 768px) {
     margin-bottom:-20px ; 

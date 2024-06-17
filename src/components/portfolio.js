@@ -115,7 +115,7 @@ function Portfolio() {
           <FilterButton onClick={() => setFilter("UI/UX")}>UI/UX</FilterButton>
           <FilterButton onClick={() => setFilter("web")}>Web</FilterButton>
         </FilterWrapper>
-        <div className="flex flex-wrap -m-4 lg:-m-3">
+        <div className="flex flex-wrap -m-12 lg:-m-3">
           <TransitionGroup component={null}>
             {filteredImages.map((image, index) => (
               <CSSTransition
@@ -148,10 +148,14 @@ const Name = styled.h1`
   font-family: poppins, sans-serif;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-weight: 600;
   font-size: 32px;
   margin-top: 20px;
+   @media (max-width: 768px) {
+    font-size: 22px; 
+    margin-top: -30px;
+  }
   
   pre {
     color: white;
@@ -164,12 +168,14 @@ const Name = styled.h1`
 `;
 
 const Section = styled.section`
-  padding: 10px; 
-  margin-top: 45px;
-  margin-left: 80px; 
-  margin-right: 80px;
+  padding: 100px;
+  margin-left:12px; 
+  margin-top: 15px;
+  display:flex;
+  justify-content:center;
+  align-items:center
   @media (min-width: 1024px) {
-    padding:40px; 
+    padding: 60px; 
   }
 
   &.animated {
@@ -188,6 +194,11 @@ const FilterWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 35px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 75px;
+
+  }
 `;
 
 const FilterButton = styled.button`
@@ -208,26 +219,28 @@ const FilterButton = styled.button`
     margin: 0 10px;
     font-size: 14px; 
   }
+
+  @media (max-width: 768px) {
+     display:flex;
+    justify-content:center;
+    align-items:center;
+  }
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
   padding: 4px;
   cursor: pointer;
-  animation: ${fadeIn} 1s ease-in;
-
+  animation: ${fadeIn} 1s ease-in;  
+  
   @media (min-width: 1024px) {
     width: 33.3333%;
     padding: 16px;
   }
 
-  @media (max-width: 767px) {
-    width: 100%;
-    padding: 6px;
-  }
-
+  
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.05);  
     transition: transform 0.3s ease;
   }
 
@@ -235,17 +248,17 @@ const ImageWrapper = styled.div`
     opacity: 0;
     transform: scale(0.95);
   }
-
+  
   .fade-enter-active {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 0.8s, transform 0.8s ease;
+    transition: opacity 0.8s, transform 0.8s ease;  
   }
-
+  
   .fade-exit {
     opacity: 1;
   }
-
+  
   .fade-exit-active {
     opacity: 0;
     transition: opacity 0.5s;
