@@ -193,11 +193,21 @@ const Container = styled.div`
 const FilterWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 35px;
-
+  margin-bottom: 25px;
+  padding-left:76.5px;
   @media (max-width: 768px) {
     margin-bottom: 75px;
+    display: flex;
+  }
 
+  @media (max-width: 400px) {
+    padding: 8px 17px;
+      padding-left:15px;
+    font-size: 14px; 
+  }
+
+  @media (min-width: 770px) {
+    margin-bottom: 60px;
   }
 `;
 
@@ -215,7 +225,7 @@ const FilterButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    padding: 8px 16px;
+    padding: 8px 17px;
     margin: 0 10px;
     font-size: 14px; 
   }

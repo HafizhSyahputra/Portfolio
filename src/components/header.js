@@ -78,7 +78,7 @@ function Header() {
         </div>
       </div>
       <div className={`md:hidden dropdown-menu ${isOpen ? 'open' : ''}`}>
-        <div className="px-2 pt-5 space-y-1">
+        <div className="px-2 pt-5 space-y-2">
           <button
             onClick={() => scrollToSection("portfolio")}
             className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"

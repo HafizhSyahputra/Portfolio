@@ -23,7 +23,7 @@ const slideInFromLeft = keyframes`
 
 // Styled Components
 const Container = styled.div`
-  margin-top: -20px;
+  margin-top: -35px;
   display: flex;
   flex-wrap: wrap;
   background-color: #2e2f34;
@@ -48,7 +48,7 @@ const LeftSection = styled.div`
 
   @media (max-width: 1024px) {
     margin-left: 0px;
-    margin-top: 40px;
+    margin-top:10px;
     padding: 20px;
   }
 `;

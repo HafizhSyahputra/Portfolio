@@ -31,6 +31,8 @@ const ContactContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  
 `;
 
 const FormWrapper = styled.div`
@@ -61,6 +63,7 @@ const FormWrapper = styled.div`
 
    @media (max-width: 400px) {
     max-width: 90%;  
+        padding: 1rem; 
   }
 `;
 
