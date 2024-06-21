@@ -23,7 +23,7 @@ const slideInFromLeft = keyframes`
 
 // Styled Components
 const Container = styled.div`
-  margin-top: 95px;
+  margin-top: 85px;
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -87,7 +87,7 @@ const Name = styled.h1`
 
   @media (max-width: 1024px) {
     &::after {
-      width: 230px;
+      width: 100%;
       transform: translateX(-22%);
     }
   }
@@ -104,7 +104,9 @@ const SocialLinks = styled.div`
 
   @media (max-width: 768px) {
     margin-top: 50px;
-    text-align: left;
+    margin-left: 0;
+    grid:none;
+    text-align: center;
   }
 `;
 

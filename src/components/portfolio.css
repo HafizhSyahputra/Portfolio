@@ -20,3 +20,7 @@
   transform: scale(0.95);
   transition: opacity 0.5s, transform 0.5s ease;
 }
+
+.s{
+  color: transparent;
+}

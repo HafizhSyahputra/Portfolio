@@ -31,7 +31,8 @@
   z-index: 10; 
   transition: box-shadow 0.3s ease-in-out;
   @media (max-width: 768px) {
-    padding: 40px;
+    padding: 30px;
+    height:auto;
   }
   
 }
