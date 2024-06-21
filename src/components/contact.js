@@ -18,21 +18,17 @@ const fadeIn = keyframes`
 
 const ContactContainer = styled.div`
   margin-top: 20px;
-  width:100%;
-  padding-left:10px;
+  padding-left: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #2e2f34;
-  @media (max-width: 768px) {
-      margin-top: 30px;
-      display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  
+  @media (max-width: 768px) {
+    margin-top: 30px;
+    padding-right: 10px;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -46,7 +42,8 @@ const FormWrapper = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  transform: ${(props) => (props.isVisible ? "translateY(0)" : "translateY(20px)")};
+  transform: ${(props) =>
+    props.isVisible ? "translateY(0)" : "translateY(20px)"};
   transition: opacity 2s ease, transform 1s ease;
 
   @media (min-width: 768px) {
@@ -56,24 +53,20 @@ const FormWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    padding: 2rem; 
-    margin-bottom:20px;
-    max-width: 90%;  
+    padding: 2rem;
+    margin-bottom: 20px;
+    max-width: 90%;
   }
 
-   @media (max-width: 400px) {
-    max-width: 90%;  
-        padding: 1rem; 
+  @media (max-width: 400px) {
+    max-width: 90%;
+    padding: 1rem;
   }
 `;
 
 const ContactDetails = styled.div`
   color: #fff;
   flex: 1;
-
-  @media (max-width: 768px) {
-    margin-bottom:-20px ; 
-  }
 `;
 
 const First = styled.p`
@@ -88,7 +81,7 @@ const First = styled.p`
   padding-bottom: 5px;
 
   @media (max-width: 768px) {
-    font-size: 12px;  
+    font-size: 12px;
   }
 `;
 
@@ -99,7 +92,7 @@ const Title = styled.h2`
   font-weight: 500;
 
   @media (max-width: 768px) {
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
   }
 `;
 
@@ -112,7 +105,7 @@ const Description = styled.p`
   color: #b0b0b0;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;  
+    font-size: 0.8rem;
   }
 `;
 
@@ -126,8 +119,8 @@ const Info = styled.div`
   gap: 0.5rem;
 
   @media (max-width: 768px) {
-    margin-left: 20px; 
-    font-size: 0.8rem; 
+    margin-left: 20px;
+    font-size: 0.8rem;
   }
 `;
 
@@ -142,7 +135,7 @@ const InfoLabel = styled.span`
   font-size: 0.9rem;
 
   @media (max-width: 768px) {
-    font-size: 0.7rem;  
+    font-size: 0.7rem;
   }
 `;
 
@@ -151,7 +144,7 @@ const InfoText = styled.span`
   font-family: "Poppins", sans-serif;
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;  
+    font-size: 0.8rem;
   }
 `;
 
@@ -170,7 +163,7 @@ const Form = styled.form`
   }
 
   @media (max-width: 768px) {
-    gap: 0.5rem;  
+    gap: 0.5rem;
   }
 `;
 
@@ -185,7 +178,7 @@ const Input = styled.input`
   color: #fff;
 
   @media (max-width: 768px) {
-    font-size: 12px;  
+    font-size: 12px;
   }
 `;
 
@@ -201,9 +194,9 @@ const TextArea = styled.textarea`
 
   @media (max-width: 768px) {
     grid-column: span 1;
-    height: 150px;  
-    padding:22px;
-    font-size: 12px;  
+    height: 150px;
+    padding: 22px;
+    font-size: 12px;
   }
 `;
 
@@ -245,7 +238,6 @@ const Contact = () => {
   }, []);
 
   return (
-    <div>
     <ContactContainer>
       <FormWrapper isVisible={isVisible}>
         <ContactDetails>
@@ -307,7 +299,6 @@ const Contact = () => {
         </Form>
       </FormWrapper>
     </ContactContainer>
-    </div>
   );
 };
 

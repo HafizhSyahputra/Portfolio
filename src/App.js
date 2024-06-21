@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import profileImage from "./assets/img/Putra-Image.png";
 import pdfFile from "./assets/file/CV Hafizh Syahputra.pdf";
@@ -25,6 +25,8 @@ const slideInFromLeft = keyframes`
 const Container = styled.div`
   margin-top: 95px;
   display: flex;
+  justify-content: space-between;
+  padding: 20px;
   flex-wrap: wrap;
   background-color: #2e2f34;
   color: #fff;
@@ -32,6 +34,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center; /* Center items vertically */
   }
 `;
 
@@ -41,15 +44,19 @@ const LeftSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 110px;
+  margin-left: 95px;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateX(${(props) => (props.isVisible ? "0" : "-100%")});
   transition: opacity 1.5s ease-out, transform 1.5s ease-out;
 
   @media (max-width: 1024px) {
-    margin-left: 0px;
-    margin-top: 10px;
-    padding: 20px;
+    margin-top: 20px;
+    margin-left: 90px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    margin-left: 0;
   }
 `;
 
@@ -80,14 +87,7 @@ const Name = styled.h1`
 
   @media (max-width: 1024px) {
     &::after {
-      content: "";
-      display: block;
       width: 230px;
-      height: 1px;
-      background-color: #ffa500;
-      position: absolute;
-      bottom: -20px;
-      left: 23%;
       transform: translateX(-22%);
     }
   }
@@ -95,17 +95,16 @@ const Name = styled.h1`
 
 const SocialLinks = styled.div`
   display: grid;
-  margin-top: 50px;
+  margin-top: 60px;
+  margin-left: -70px;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-  margin-right: 70px;
   margin-bottom: 2rem;
   font-family: "Poppins", sans-serif;
 
   @media (max-width: 768px) {
-    margin-right: 0;
-    grid-template-columns: 1fr;
-    text-align: center;
+    margin-top: 50px;
+    text-align: left;
   }
 `;
 
@@ -137,7 +136,6 @@ const ContactButton = styled.button`
 
   @media (max-width: 768px) {
     margin-left: 0;
-    padding: 8px 40px;
   }
 `;
 
@@ -159,7 +157,7 @@ const ProfileImageWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    order: 3; /* Move to bottom */
+    order: 3;
     margin-top: 20px;
     margin-left: 0;
   }
@@ -188,7 +186,7 @@ const RightSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 120px;
+  padding: 110px;
   text-align: left;
   opacity: ${(props) => (props.isVisible ? 1 : 0)};
   transform: translateX(${(props) => (props.isVisible ? "0" : "100%")});
@@ -197,6 +195,7 @@ const RightSection = styled.div`
   @media (max-width: 768px) {
     padding: 20px;
     margin-top: 50px;
+    text-align: left;
   }
 `;
 
@@ -256,6 +255,9 @@ const DownloadCVButton = styled.button`
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const [isImageVisible, setIsImageVisible] = useState(false);
+
+  const imageRef = useRef(null);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -264,8 +266,25 @@ const App = () => {
     }
   };
 
+  const handleScroll = () => {
+    const element = imageRef.current;
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const viewportHeight = window.innerHeight;
+      if (elementPosition < viewportHeight) {
+        setIsImageVisible(true);
+      } else {
+        setIsImageVisible(false);
+      }
+    }
+  };
+
   useEffect(() => {
     setIsVisible(true);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleDownloadCV = () => {
@@ -315,7 +334,12 @@ const App = () => {
           </ContactButton>
         </LeftSection>
         <ProfileImageWrapper isVisible={isVisible}>
-          <ProfileImage src={profileImage} alt="Hafizh Syahputra" />
+          <ProfileImage
+            ref={imageRef}
+            src={profileImage}
+            alt="Hafizh Syahputra"
+            className={isImageVisible ? "visible" : ""}
+          />
         </ProfileImageWrapper>
         <RightSection isVisible={isVisible}>
           <Title>About Me</Title>
@@ -342,3 +366,10 @@ const App = () => {
 };
 
 export default App;
+
+export const scrollToSection = (id) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
