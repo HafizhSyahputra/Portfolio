@@ -1,26 +1,40 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import logo from "../assets/img/HP.png"; 
 import "./header.css"; 
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasShadow, setHasShadow] = useState(false);
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev);
   }, []);
 
   const scrollToSection = useCallback((id) => {
-    const element = document.getElementById(id);
-    console.log("Scrolling to:", id); 
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (id === "aboutme") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      console.warn(`Element dengan id "${id}" tidak ditemukan.`);
+      const element = document.getElementById(id);
+      console.log("Scrolling to:", id); 
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        console.warn(`Element dengan id "${id}" tidak ditemukan.`);
+      }
     }
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasShadow(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-custom p-10 pl-32 pr-32">
+    <nav className={`bg-custom p-10 pl-32 pr-32 fixed top-0 left-0 right-0 z-10 ${hasShadow ? 'shadow' : ''}`}>
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <img src={logo} alt="logo" className="h-6 w-8" />
@@ -52,7 +66,7 @@ function Header() {
             className="text-gray-300 hover:text-white focus:outline-none"
           >
             <svg
-              className="h-6 w-6"
+              className="h-7 w-7"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -79,6 +93,12 @@ function Header() {
       </div>
       <div className={`md:hidden dropdown-menu ${isOpen ? 'open' : ''}`}>
         <div className="px-2 pt-5 space-y-2">
+          <button
+            onClick={() => scrollToSection("aboutme")}
+            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+          >
+            About Me
+          </button>
           <button
             onClick={() => scrollToSection("portfolio")}
             className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"

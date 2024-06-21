@@ -23,7 +23,7 @@ const slideInFromLeft = keyframes`
 
 // Styled Components
 const Container = styled.div`
-  margin-top: -35px;
+  margin-top: 95px;
   display: flex;
   flex-wrap: wrap;
   background-color: #2e2f34;
@@ -48,7 +48,7 @@ const LeftSection = styled.div`
 
   @media (max-width: 1024px) {
     margin-left: 0px;
-    margin-top:10px;
+    margin-top: 10px;
     padding: 20px;
   }
 `;
@@ -80,16 +80,16 @@ const Name = styled.h1`
 
   @media (max-width: 1024px) {
     &::after {
-    content: "";
-    display: block;
-    width: 230px;
-    height: 1px;
-    background-color: #ffa500;
-    position: absolute;
-    bottom: -20px;
-    left: 23%;
-    transform: translateX(-22%);
-  }
+      content: "";
+      display: block;
+      width: 230px;
+      height: 1px;
+      background-color: #ffa500;
+      position: absolute;
+      bottom: -20px;
+      left: 23%;
+      transform: translateX(-22%);
+    }
   }
 `;
 
@@ -288,7 +288,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div id="aboutme">
       <Container>
         <LeftSection isVisible={isVisible}>
           <Name>
@@ -321,15 +321,11 @@ const App = () => {
           <Title>About Me</Title>
           <Subtitle>Hello!</Subtitle>
           <Description showFull={showFullDescription}>
-            I am Hafizh Syahputra, a bachelor student in Informatics Engineering
-            from Malikussaleh University. My passion for computers and
-            technology has led me to gain various skills and experiences
-            throughout my academic and professional journey. I am skilled in web
-            and mobile application development, programming, and digital design.
-            Additionally, I have experience as a laboratory assistant and am
-            committed to continual learning and self-improvement. I am excited
-            to bring my skills and dedication to new challenges and
-            opportunities.
+            I am a student in the 11th grade at Vocational High School majoring
+            in Software Engineering. My primary interests lie in Web
+            Programming, Android Development, and UI/UX design. I am sociable,
+            enjoy learning new things, and always enthusiastic about tackling
+            tasks.
           </Description>
           <ToggleButton onClick={toggleDescription}>
             {showFullDescription ? "Read Less" : "More"}

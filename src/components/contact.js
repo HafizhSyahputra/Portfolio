@@ -245,8 +245,9 @@ const Contact = () => {
   }, []);
 
   return (
+    <div>
     <ContactContainer>
-      <FormWrapper  id="contact" isVisible={isVisible}>
+      <FormWrapper isVisible={isVisible}>
         <ContactDetails>
           <First>CONTACT</First>
           <Title>GET IN TOUCH</Title>
@@ -306,6 +307,7 @@ const Contact = () => {
         </Form>
       </FormWrapper>
     </ContactContainer>
+    </div>
   );
 };
 

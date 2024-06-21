@@ -2,42 +2,36 @@ import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./portfolio.css";
-import eccomerceIMG from "../assets/img/portfolio/Cover.webp";
-import digoda from "../assets/img/portfolio/digoda.webp";
-import realestate from "../assets/img/portfolio/realestate.webp";
-import makan from "../assets/img/portfolio/makan.webp";
-import hospital from "../assets/img/portfolio/hospital.webp";
-import inventory from "../assets/img/portfolio/inventory.webp";
 import { lazyload } from "react-lazyload";
 
 const images = [
   {
-    src: eccomerceIMG,
+    src: 'https://cdn.dribbble.com/userupload/15206420/file/original-8a512a7af090e5ffbbfaa9b8e685d960.webp?resize=1200x723',
     category: "app",
     link: "https://github.com/HafizhSyahputra"
   },
   {
-    src: digoda,
+    src: 'https://cdn.dribbble.com/userupload/15206441/file/original-ef6acdb7dd1efe000905da52a779d633.webp?resize=1200x800',
     category: "UI/UX",
     link: "https://www.figma.com/proto/eeRvBInwZKV8SHDsceesz8/DIGODA?page-id=0%3A1&node-id=2-34&viewport=308%2C343%2C0.09&t=79xMhcarzwuGzxiX-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1%3A2&show-proto-sidebar=1"
   },
   {
-    src: makan,
+    src: 'https://cdn.dribbble.com/userupload/15206505/file/original-23221832c9f1c7380a420b7e37198b9a.webp?resize=1200x800',
     category: "web",
     link: "https://github.com/HafizhSyahputra"
   },
   {
-    src: realestate,
+    src: 'https://cdn.dribbble.com/userupload/15206519/file/original-38ead0b6a39dd1dd17f33f4b1c3d84ef.webp?resize=1200x780',
     category: "web",
     link: "https://github.com/greyseth/realestate-site/tree/updated"
   },
   {
-    src: hospital,
+    src: 'https://cdn.dribbble.com/userupload/15206464/file/original-559fec5871c5ac12d9ebdd7498dcd539.webp?resize=1200x800',
     category: "UI/UX",
     link: "https://www.figma.com/proto/gDm3sPq1vCi8S29iv5PO09/UI%2FUX-Hospital?page-id=0%3A1&node-id=240-64&starting-point-node-id=240%3A64&t=KNwgne9l30tiG5Qw-1"
   },
   {
-    src: inventory,
+    src: 'https://cdn.dribbble.com/userupload/15206490/file/original-301a3bed43ede2d4cc1062e4bcade76c.webp?resize=1200x682',
     category: "web",
     link: "https://github.com/HafizhSyahputra/uaspemweb"
   }
@@ -106,8 +100,9 @@ function Portfolio() {
   
 
   return (
-    <Section className={`py-10 lg:py-20 ${isAnimated ? 'animated' : ''}`}>
-      <Container id="portfolio"  className="container mx-auto px-4">
+    <div>
+    <Section  id="portfolio"  className={`py-10 lg:py-20 ${isAnimated ? 'animated' : ''}`}>
+      <Container className="container mx-auto px-4">
         <Name><pre>MY</pre><pre className="highlight"> PORTFOLIO</pre></Name>
         <FilterWrapper className="pl-20 pr-20">
           <FilterButton onClick={() => setFilter("all")}>All</FilterButton>
@@ -124,7 +119,7 @@ function Portfolio() {
                 classNames="fade"
               >
                 <ImageWrapper className="w-full lg:w-1/3 lg:p-3" onClick={() => handleCardClick(image.link)}>
-                  <LazyImage src={image.src} alt="" style={lazyload} />
+                  <LazyImage src={image.src} alt="" style={lazyload}  />
                 </ImageWrapper>
               </CSSTransition>
             ))}
@@ -140,6 +135,8 @@ function Portfolio() {
         </Modal>
       )}
     </Section>
+    <div id="contact" className="s">s</div>
+    </div>
   );
 }
 
@@ -170,11 +167,11 @@ const Name = styled.h1`
 const Section = styled.section`
   padding: 100px;
   margin-left:12px; 
-  margin-top: 15px;
+  margin-top: 25px;
   display:flex;
   justify-content:center;
   align-items:center
-  @media (min-width: 1024px) {
+  @media (max-width: 1024px) {
     padding: 60px; 
   }
 
