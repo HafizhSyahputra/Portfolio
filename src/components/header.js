@@ -95,7 +95,7 @@ function Header() {
   <button
     onClick={handleToggle} 
     type="button"
-    className="absolute top-10 right-10 text-gray-300 hover:text-white focus:outline-none"
+    className="absolute top-7 right-8 text-gray-300 hover:text-white focus:outline-none"
   >
     <svg
       className="h-7 w-7"

@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(46, 47, 52, 0.95); /* Ubah opacity sesuai keinginan */
+  background-color: rgba(46, 47, 52, 0.95); 
   z-index: 1000;
   display: flex;
   justify-content: center;
