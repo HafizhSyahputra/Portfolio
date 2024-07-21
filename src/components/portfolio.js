@@ -53,6 +53,7 @@ function Portfolio() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isAnimated, setIsAnimated] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [currentProject, setCurrentProject] = useState(null);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -87,15 +88,15 @@ function Portfolio() {
       ? images
       : images.filter((image) => image.category === filter);
 
-  const handleCardClick = (url) => {
+  const handleCardClick = (project) => {
+    setCurrentProject(project);
     setShowModal(true);
-    setTimeout(() => {
-      window.location.href = url;
-    }, 1500);
+  };
 
-    setTimeout(() => {
-      setShowModal(false);
-    }, 2000);
+  const handleLinkClick = () => {
+    if (currentProject) {
+      window.location.href = currentProject.link;
+    }
   };
 
   return (
@@ -123,7 +124,7 @@ function Portfolio() {
                 <CSSTransition key={index} timeout={500} classNames="fade">
                   <ImageWrapper
                     className="w-full lg:w-1/3 lg:p-3"
-                    onClick={() => handleCardClick(image.link)}
+                    onClick={() => handleCardClick(image)}
                   >
                     <LazyImage src={image.src} alt="" style={lazyload} />
                   </ImageWrapper>
@@ -132,11 +133,12 @@ function Portfolio() {
             </TransitionGroup>
           </div>
         </Container>
-        {showModal && (
+        {showModal && currentProject && (
           <Modal>
             <ModalContent>
-              <Loader />
-              <ModalText>Please wait, you are being redirected...</ModalText>
+              <ModalText>{currentProject.description}</ModalText>
+              <ModalButton onClick={handleLinkClick}>View Project</ModalButton>
+              <CloseButton onClick={() => setShowModal(false)}>Close</CloseButton>
             </ModalContent>
           </Modal>
         )}
@@ -232,14 +234,14 @@ const FilterButton = styled.button`
 
   &:hover {
     background-color: #fff;
-    color:black;
-    transform:scale(1.1);
+    color: black;
+    transform: scale(1.1);
   }
 
   @media (max-width: 768px) {
     padding: 8px 17px;
-    margin: 0 10px
-        font-size: 14px;
+    margin: 0 10px;
+    font-size: 14px;
   }
 
   @media (max-width: 400px) {
@@ -267,7 +269,6 @@ const ImageWrapper = styled.div`
     transition: transform 0.3s ease;
   }
 `;
-
 
 const Image = styled.img`
   width: 100%;
@@ -367,7 +368,33 @@ const ModalText = styled.div`
   font-size: 15px;
   font-weight: 600;
   text-align: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
+const ModalButton = styled.button`
+  background-color: #1F2121;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #fff;
+    color: black;
+  }
+`;
+
+const CloseButton = styled.button`
+  background-color: transparent;
+  color: #1F2121;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-size: 14px;
 `;
 
 export default Portfolio;

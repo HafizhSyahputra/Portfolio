@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import profileImage from "./assets/img/Putra-Image.png";
-import pdfFile from "./assets/file/CV Hafizh Syahputra.pdf";
+import pdfFile from "./assets/file/NEW CV 2024 Hafizh Syahputra.pdf";
 import Portfolio from "./components/portfolio";
 import Contact from "./components/contact";
+import "./App.css";
 
 // Animations
 const fadeIn = keyframes`
@@ -34,7 +35,7 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center; /* Center items vertically */
+    align-items: center;
   }
 `;
 
@@ -254,12 +255,31 @@ const DownloadCVButton = styled.button`
   }
 `;
 
+const Cursor = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) ${(props) => props.isClickable ? 'scale(1.7)' : 'scale(1)'};
+  transition: transform 0.1s ease, background 0.1s ease, box-shadow 0.1s ease;
+  box-shadow: ${(props) => props.isClickable ? '0 0 15px rgba(0, 0, 0, 0.4)' : '0 0 5px rgba(0, 0, 0, 0.2)'};
+  z-index: 9999;
+  transform: translate(-50%, -50%) ${(props) => props.isClicked ? 'scale(2)' : (props.isClickable ? 'scale(1.7)' : 'scale(1)')}; // Update transform property
+`;
+
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isImageVisible, setIsImageVisible] = useState(false);
+  const [isClickable, setIsClickable] = useState(false); // State untuk melacak elemen yang dapat diklik
+  const [isClicked, setIsClicked] = useState(false); // State untuk melacak klik
 
   const imageRef = useRef(null);
+  const cursorRef = useRef(null);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -281,11 +301,53 @@ const App = () => {
     }
   };
 
+  const handleMouseMove = (e) => {
+    if (cursorRef.current) {
+      cursorRef.current.style.top = `${e.clientY}px`;
+      cursorRef.current.style.left = `${e.clientX}px`;
+    }
+  };
+
+  const handleMouseEnter = () => {
+    console.log("Mouse entered a clickable element");
+    setIsClickable(true);
+  };
+
+  const handleMouseLeave = () => {
+    console.log("Mouse left a clickable element");
+    setIsClickable(false);
+  };
+
+  const handleMouseDown = () => {
+    setIsClicked(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsClicked(false);
+  };
+
   useEffect(() => {
     setIsVisible(true);
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousedown", handleMouseDown); // Menambahkan event listener untuk mouse down
+    window.addEventListener("mouseup", handleMouseUp); // Menambahkan event listener untuk mouse up
+
+    const clickableElements = document.querySelectorAll("a, button, input, textarea");
+    clickableElements.forEach(element => {
+      element.addEventListener("mouseenter", handleMouseEnter);
+      element.addEventListener("mouseleave", handleMouseLeave);
+    });
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown); // Menghapus event listener
+      window.removeEventListener("mouseup", handleMouseUp); // Menghapus event listener
+      clickableElements.forEach(element => {
+        element.removeEventListener("mouseenter", handleMouseEnter);
+        element.removeEventListener("mouseleave", handleMouseLeave);
+      });
     };
   }, []);
 
@@ -296,7 +358,7 @@ const App = () => {
         const url = window.URL.createObjectURL(new Blob([blob]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "CV_Hafizh_Syahputra.pdf");
+        link.setAttribute("download", "NEW CV 2024 Hafizh Syahputra.pdf");
         document.body.appendChild(link);
         link.click();
         link.parentNode.removeChild(link);
@@ -347,7 +409,7 @@ const App = () => {
           <Title>About Me</Title>
           <Subtitle>Hello!</Subtitle>
           <Description showFull={showFullDescription}>
-            I am a student in the 11th grade at Vocational High School majoring
+            I am a student in Bina Informatika Vocational High School majoring
             in Software Engineering. My primary interests lie in Web
             Programming, Android Development, and UI/UX design. I am sociable,
             enjoy learning new things, and always enthusiastic about tackling
@@ -363,6 +425,7 @@ const App = () => {
       </Container>
       <Portfolio />
       <Contact />
+      <Cursor ref={cursorRef} isClickable={isClickable} isClicked={isClicked} />
     </div>
   );
 };
