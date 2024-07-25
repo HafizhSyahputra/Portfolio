@@ -261,22 +261,24 @@ const Cursor = styled.div`
   left: 0;
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.7);
+  background: ${(props) => (props.isWhiteBackground ? 'rgba(0, 0, 0, 0.4)' : 'rgba(255, 255, 255, 0.7)')}; 
   border-radius: 50%;
   pointer-events: none;
-  transform: translate(-50%, -50%) ${(props) => props.isClickable ? 'scale(1.7)' : 'scale(1)'};
+  transform: translate(-50%, -50%) ${(props) => props.isClickable ? 'scale(1.3)' : 'scale(1)'};
   transition: transform 0.1s ease, background 0.1s ease, box-shadow 0.1s ease;
   box-shadow: ${(props) => props.isClickable ? '0 0 15px rgba(0, 0, 0, 0.4)' : '0 0 5px rgba(0, 0, 0, 0.2)'};
   z-index: 9999;
-  transform: translate(-50%, -50%) ${(props) => props.isClicked ? 'scale(2)' : (props.isClickable ? 'scale(1.7)' : 'scale(1)')}; // Update transform property
+  transform: translate(-50%, -50%) ${(props) => props.isClicked ? 'scale(2.3)' : (props.isClickable ? 'scale(2)' : 'scale(1)')};
 `;
+
 
 const App = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isImageVisible, setIsImageVisible] = useState(false);
-  const [isClickable, setIsClickable] = useState(false); // State untuk melacak elemen yang dapat diklik
-  const [isClicked, setIsClicked] = useState(false); // State untuk melacak klik
+  const [isClickable, setIsClickable] = useState(false); 
+  const [isClicked, setIsClicked] = useState(false);
+  const [isWhiteBackground, setIsWhiteBackground] = useState(false); 
 
   const imageRef = useRef(null);
   const cursorRef = useRef(null);
@@ -305,16 +307,25 @@ const App = () => {
     if (cursorRef.current) {
       cursorRef.current.style.top = `${e.clientY}px`;
       cursorRef.current.style.left = `${e.clientX}px`;
+
+      // Cek warna latar belakang di elemen yang berada di bawah kursor
+      const x = e.clientX;
+      const y = e.clientY;
+      const element = document.elementFromPoint(x, y);
+      const computedStyle = getComputedStyle(element);
+      const backgroundColor = computedStyle.backgroundColor;
+
+      // Periksa apakah latar belakang putih
+      const isWhite = backgroundColor === 'rgb(255, 255, 255)';
+      setIsWhiteBackground(isWhite);
     }
   };
 
   const handleMouseEnter = () => {
-    console.log("Mouse entered a clickable element");
     setIsClickable(true);
   };
 
   const handleMouseLeave = () => {
-    console.log("Mouse left a clickable element");
     setIsClickable(false);
   };
 
@@ -423,18 +434,11 @@ const App = () => {
           </DownloadCVButton>
         </RightSection>
       </Container>
-      <Portfolio />
+      <Portfolio  ref={cursorRef} isClickable={isClickable} isClicked={isClicked} />
       <Contact />
-      <Cursor ref={cursorRef} isClickable={isClickable} isClicked={isClicked} />
+      <Cursor ref={cursorRef} isClickable={isClickable} isClicked={isClicked} isWhiteBackground={isWhiteBackground} />
     </div>
   );
 };
 
 export default App;
-
-export const scrollToSection = (id) => {
-  const element = document.getElementById(id);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth" });
-  }
-};

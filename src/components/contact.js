@@ -237,6 +237,43 @@ const Contact = () => {
     };
   }, []);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const message = formData.get("message");
+
+    const payload = {
+      content: `New contact form submission:
+      - **Name:** ${name}
+      - **Email:** ${email}
+      - **Message:** ${message}`
+    };
+
+    fetch("YOUR_DISCORD_WEBHOOK_URL", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert("Your message has been sent successfully!");
+          form.reset();
+        } else {
+          alert("Failed to send your message. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Failed to send your message. Please try again later.");
+      });
+  };
+
   return (
     <ContactContainer>
       <FormWrapper isVisible={isVisible}>
@@ -287,14 +324,14 @@ const Contact = () => {
             />
             <InfoWrapper>
               <InfoLabel>Mail Us</InfoLabel>
-              <InfoText>hafizhsyaputra676@gmail.com</InfoText>
+              <InfoText>ptr.putramail@gmail.com</InfoText>
             </InfoWrapper>
           </Info>
         </ContactDetails>
-        <Form>
-          <Input type="text" placeholder="Your Name" required />
-          <Input type="email" placeholder="Your Email" required />
-          <TextArea placeholder="Message" required />
+        <Form onSubmit={handleSubmit}>
+          <Input type="text" name="name" placeholder="Your Name" required />
+          <Input type="email" name="email" placeholder="Your Email" required />
+          <TextArea name="message" placeholder="Message" required />
           <Button type="submit">Submit It</Button>
         </Form>
       </FormWrapper>
