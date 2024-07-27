@@ -152,7 +152,7 @@ function Portfolio() {
         )}
       </Section>
       <div id="contact" className="s">
-        s
+        example
       </div>
     </div>
   );

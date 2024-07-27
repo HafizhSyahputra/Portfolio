@@ -307,20 +307,23 @@ const App = () => {
     if (cursorRef.current) {
       cursorRef.current.style.top = `${e.clientY}px`;
       cursorRef.current.style.left = `${e.clientX}px`;
-
-      // Cek warna latar belakang di elemen yang berada di bawah kursor
+  
       const x = e.clientX;
       const y = e.clientY;
       const element = document.elementFromPoint(x, y);
-      const computedStyle = getComputedStyle(element);
-      const backgroundColor = computedStyle.backgroundColor;
-
-      // Periksa apakah latar belakang putih
-      const isWhite = backgroundColor === 'rgb(255, 255, 255)';
-      setIsWhiteBackground(isWhite);
+  
+      if (element && element.nodeType === Node.ELEMENT_NODE) {
+        const computedStyle = getComputedStyle(element);
+        const backgroundColor = computedStyle.backgroundColor;
+  
+         const isWhite = backgroundColor === 'rgb(255, 255, 255)';
+        setIsWhiteBackground(isWhite);
+      } else {
+         setIsWhiteBackground(false);
+      }
     }
   };
-
+  
   const handleMouseEnter = () => {
     setIsClickable(true);
   };
@@ -341,8 +344,8 @@ const App = () => {
     setIsVisible(true);
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mousedown", handleMouseDown); // Menambahkan event listener untuk mouse down
-    window.addEventListener("mouseup", handleMouseUp); // Menambahkan event listener untuk mouse up
+    window.addEventListener("mousedown", handleMouseDown);  
+    window.addEventListener("mouseup", handleMouseUp); 
 
     const clickableElements = document.querySelectorAll("a, button, input, textarea");
     clickableElements.forEach(element => {
@@ -353,8 +356,8 @@ const App = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mousedown", handleMouseDown); // Menghapus event listener
-      window.removeEventListener("mouseup", handleMouseUp); // Menghapus event listener
+      window.removeEventListener("mousedown", handleMouseDown); 
+      window.removeEventListener("mouseup", handleMouseUp); 
       clickableElements.forEach(element => {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);

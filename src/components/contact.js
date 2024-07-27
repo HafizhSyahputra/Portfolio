@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import addressIcon from "../assets/img/address.png";
 import phoneIcon from "../assets/img/telp.png";
@@ -97,7 +99,7 @@ const Title = styled.h2`
 `;
 
 const Description = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   padding-right: 50px;
   margin-bottom: 1.5rem;
   font-family: "Poppins", sans-serif;
@@ -177,6 +179,11 @@ const Input = styled.input`
   background-color: #34353a;
   color: #fff;
 
+  &:focus {
+    outline: none;
+    border: 1px solid #ffc700;
+  }
+
   @media (max-width: 768px) {
     font-size: 12px;
   }
@@ -191,6 +198,11 @@ const TextArea = styled.textarea`
   color: #fff;
   height: 200px;
   grid-column: span 2;
+
+  &:focus {
+    outline: none;
+    border: 1px solid #ffc700;
+  }
 
   @media (max-width: 768px) {
     grid-column: span 1;
@@ -239,103 +251,146 @@ const Contact = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+  
     const form = event.target;
     const formData = new FormData(form);
     const name = formData.get("name");
     const email = formData.get("email");
     const message = formData.get("message");
-
+  
     const payload = {
-      content: `New contact form submission:
-      - **Name:** ${name}
-      - **Email:** ${email}
-      - **Message:** ${message}`
+      embeds: [
+        {
+          title: "New Contact Form Submission",
+          color: 0x00ff00,
+          fields: [
+            {
+              name: "Name",
+              value: name,
+              inline: true,
+            },
+            {
+              name: "Email",
+              value: email,
+              inline: true,
+            },
+            {
+              name: "Message",
+              value: message,
+            },
+          ],
+          footer: {
+            text: "🚀 Contact Notification" 
+          },
+          timestamp: new Date(),
+        },
+      ],
     };
-
-    fetch("YOUR_DISCORD_WEBHOOK_URL", {
+  
+    fetch("https://discord.com/api/webhooks/1265232784373321728/2AYLqLtlNpTG_TtzebtuyqDhCu9Ux57HJ5nj3CS24ggS57OQ2dEnBKXOwt9qit0YJp2U", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     })
       .then((response) => {
         if (response.ok) {
-          alert("Your message has been sent successfully!");
+          toast.success("Your message has been sent successfully!");
           form.reset();
         } else {
-          alert("Failed to send your message. Please try again later.");
+          toast.error("Failed to send your message. Please try again later.");
         }
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("Failed to send your message. Please try again later.");
+        toast.error("Failed to send your message. Please try again later.");
       });
   };
+  
 
   return (
-    <ContactContainer>
-      <FormWrapper isVisible={isVisible}>
-        <ContactDetails>
-          <First>CONTACT</First>
-          <Title>GET IN TOUCH</Title>
-          <Description>
-            From responsive UI designs to deep UX development, I am committed to
-            delivering outcomes that not only meet expectations but also exceed
-            client goals. My portfolio showcases my ability to adapt to diverse
-            challenges and create measurable, impactful solutions. I am
-            enthusiastic about collaborating and contributing to projects that
-            make a significant impact for your team.
-          </Description>
-          <Info>
-            <img
-              className="mt-2"
-              src={addressIcon}
-              alt="Address Icon"
-              width="17"
-              height="24"
+    <>
+      <ContactContainer id="contact">
+        <FormWrapper isVisible={isVisible}>
+          <ContactDetails>
+            <First>CONTACT</First>
+            <Title>GET IN TOUCH</Title>
+            <Description>
+              Are you ready to elevate your digital presence? Connect with our
+              skilled web developers to create a stunning and functional website
+              tailored to your needs. If you're looking to build or enhance your
+              Android app, our experienced Android developers are here to bring
+              your vision to life with cutting-edge technology. For those
+              seeking an intuitive and engaging user experience, our talented
+              UI/UX designers will craft interfaces that captivate and delight
+              your audience. Reach out to us today, and let's start turning your
+              ideas into reality!
+            </Description>
+            <Info>
+              <img
+                className="mt-2"
+                src={addressIcon}
+                alt="Address Icon"
+                width="17"
+                height="24"
+              />
+              <InfoWrapper>
+                <InfoLabel>Address</InfoLabel>
+                <InfoText>Jln. Musyawarah</InfoText>
+              </InfoWrapper>
+            </Info>
+            <Info>
+              <img
+                className="mt-2"
+                src={phoneIcon}
+                alt="Phone Icon"
+                width="21"
+                height="22"
+              />
+              <InfoWrapper>
+                <InfoLabel>Call Us</InfoLabel>
+                <InfoText>+62 877 7085 3577</InfoText>
+              </InfoWrapper>
+            </Info>
+            <Info>
+              <img
+                className="mt-2"
+                src={mailIcon}
+                alt="Mail Icon"
+                height="22"
+                width="23"
+              />
+              <InfoWrapper>
+                <InfoLabel>Mail Us</InfoLabel>
+                <InfoText>ptr.putramail@gmail.com</InfoText>
+              </InfoWrapper>
+            </Info>
+          </ContactDetails>
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
             />
-            <InfoWrapper>
-              <InfoLabel>Address</InfoLabel>
-              <InfoText>Jln. Musyawarah</InfoText>
-            </InfoWrapper>
-          </Info>
-          <Info>
-            <img
-              className="mt-2"
-              src={phoneIcon}
-              alt="Phone Icon"
-              width="21"
-              height="22"
+            <Input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
             />
-            <InfoWrapper>
-              <InfoLabel>Call Us</InfoLabel>
-              <InfoText>+62 877 7085 3577</InfoText>
-            </InfoWrapper>
-          </Info>
-          <Info>
-            <img
-              className="mt-2"
-              src={mailIcon}
-              alt="Mail Icon"
-              height="22"
-              width="23"
+            <TextArea
+              name="message"
+              placeholder="Message"
+              required
             />
-            <InfoWrapper>
-              <InfoLabel>Mail Us</InfoLabel>
-              <InfoText>ptr.putramail@gmail.com</InfoText>
-            </InfoWrapper>
-          </Info>
-        </ContactDetails>
-        <Form onSubmit={handleSubmit}>
-          <Input type="text" name="name" placeholder="Your Name" required />
-          <Input type="email" name="email" placeholder="Your Email" required />
-          <TextArea name="message" placeholder="Message" required />
-          <Button type="submit">Submit It</Button>
-        </Form>
-      </FormWrapper>
-    </ContactContainer>
+            <Button type="submit">Submit It</Button>
+          </Form>
+        </FormWrapper>
+      </ContactContainer>
+      <ToastContainer position="top-center" autoClose={3000} />
+    </>
   );
 };
 
